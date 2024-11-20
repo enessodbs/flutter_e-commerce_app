@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "143549967742",
+    "project_id": "flutterbottcamp",
+    "storage_bucket": "flutterbottcamp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143549967742:android:a090dcb76e64f66fb4d72f",
+        "android_client_info": {
+          "package_name": "com.example.flutter_ecommerce_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxdE25juhlFsO5gIIfC6DVd0qZKtoJUzQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
