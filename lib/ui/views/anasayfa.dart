@@ -40,7 +40,7 @@ class _AnasayfaState extends State<Anasayfa> {
           ),
         ),
         backgroundColor: Colors.white,
-        title: Text("Techno App", style: baslikStyle),
+        title: Text("FusionX", style: baslikStyle),
         centerTitle: true,
         actions: [
           Padding(

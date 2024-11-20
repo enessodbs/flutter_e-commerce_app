@@ -5,7 +5,6 @@ import 'package:flutter_ecommerce_app/ui/cubit/firebase_cubit.dart';
 import 'package:flutter_ecommerce_app/ui/views/anasayfa.dart';
 import 'package:flutter_ecommerce_app/ui/views/user_register_login/kayit_sayfa.dart';
 
-
 class GirisSayfa extends StatefulWidget {
   const GirisSayfa({super.key});
 
@@ -120,7 +119,11 @@ class _GirisSayfaState extends State<GirisSayfa> {
             TextEditingController resetPassEmail = TextEditingController();
 
             return AlertDialog(
-              title: const Text("Şifre Sıfırla"),
+              backgroundColor: Colors.white,
+              title: Text(
+                "Şifre Sıfırla",
+                style: TextStyle(color: textColor),
+              ),
               content: Column(
                 mainAxisSize:
                     MainAxisSize.min, // Dialog boyutunu içeriğe göre ayarla

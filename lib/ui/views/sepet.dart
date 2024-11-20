@@ -113,18 +113,19 @@ class _SepetState extends State<Sepet> {
                             showDialog(
                               context: context,
                               builder: (context) => AlertDialog(
+                                backgroundColor: Colors.white,
                                 content: const Text(
                                   "Lütfen Sepetinize Ürün Ekleyiniz!",
                                   style: TextStyle(
                                       fontSize: 20,
-                                      fontWeight: FontWeight.w500),
+                                      fontWeight: FontWeight.w500, color: Colors.black),
                                 ),
                                 actions: [
                                   TextButton(
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: const Text("Kapat"),
+                                    child: const Text("Kapat",style: TextStyle(color: Colors.black),),
                                   ),
                                 ],
                               ),
@@ -133,15 +134,16 @@ class _SepetState extends State<Sepet> {
                             showDialog(
                               context: context,
                               builder: (context) => AlertDialog(
-                                title: const Text("Sepet Onay"),
+                                backgroundColor: Colors.white,
+                                title: const Text("Sepet Onay",style: TextStyle(color: Colors.black),),
                                 content:
-                                    const Text("Sepeti Onaylıyor musunuz??"),
+                                    const Text("Sepeti Onaylıyor musunuz?",style: TextStyle(color: Colors.black),),
                                 actions: [
                                   TextButton(
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: const Text("Hayır"),
+                                    child: const Text("Hayır",style: TextStyle(color: Colors.black),),
                                   ),
                                   TextButton(
                                     onPressed: () async {
@@ -180,7 +182,7 @@ class _SepetState extends State<Sepet> {
                                       // Mevcut sayfayı kapat
                                       Navigator.pop(context);
                                     },
-                                    child: const Text("Evet"),
+                                    child: const Text("Evet",style: TextStyle(color: Colors.black),),
                                   ),
                                 ],
                               ),
