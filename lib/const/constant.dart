@@ -4,7 +4,8 @@ TextStyle baslikStyle = const TextStyle(
     fontFamily: "Bokor", fontSize: 40, fontWeight: FontWeight.bold);
 TextStyle firebaseText = const TextStyle(
     fontFamily: "Bokor", fontSize: 60, fontWeight: FontWeight.bold);
-Color backgroundColor = Colors.white;
+Color backgroundColor = Color.fromARGB(255, 255, 255, 255);
+
 Color textColor = Colors.black;
 TextStyle productNameStyle = const TextStyle(
     fontWeight: FontWeight.bold,

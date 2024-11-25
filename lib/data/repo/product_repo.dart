@@ -26,6 +26,42 @@ class ProductRepo {
     }
   }
 
+  // Firebase üzerinden kullanıcı bilgilerini çeker
+ Future<Map<String, String?>> fetchUserInfo() async {
+  try {
+    User? currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser == null) {
+      throw Exception("Kullanıcı oturum açmamış.");
+    }
+
+    // Kullanıcı dokümanını al
+    DocumentSnapshot userDoc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser.uid)
+        .get();
+
+    // Doküman verilerini kontrol et
+    Map<String, dynamic>? userData = userDoc.data() as Map<String, dynamic>?;
+    if (userData == null) {
+      throw Exception("Kullanıcı bilgileri bulunamadı.");
+    }
+
+    // Alanları kontrol et ve nullable olarak ayarla
+    String? userName = userData['ad'] as String?;
+    String? email = userData['email'] as String?;
+    String? kullaniciAdi = userData['kullaniciAdi'] as String?;
+
+    return {
+      'userName': userName,
+      'email': email,
+      'kullaniciAdi': kullaniciAdi,
+    };
+  } catch (e) {
+    // Hata durumunda dönen değer
+    return {'userName': 'Hata', 'email': 'Hata', 'kullaniciAdi': 'Hata'};
+  }
+}
+
   // Ürünleri JSON'dan parse etme metodu
   List<Product> parseProductCevap(String result) {
     try {
@@ -62,7 +98,7 @@ class ProductRepo {
       await FirebaseFirestore.instance
           .collection('users')
           .doc(userCredential.user?.uid)
-          .set({'kullaniciAdi': username, 'ad': ad});
+          .set({'kullaniciAdi': username, 'ad': ad, 'email': email});
     } on FirebaseAuthException catch (e) {
       // Firebase Auth hatası alınırsa, hata mesajını döndür
       print('Error: ${e.message}');
@@ -108,6 +144,8 @@ class ProductRepo {
       throw Exception("Şifre yenileme işlemi başarısız: $e");
     }
   }
+
+   
 
   // Ürünleri yükleme metodu
   Future<List<Product>> urunleriYukle({String kategori = "Tüm Ürünler"}) async {

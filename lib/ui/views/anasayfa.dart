@@ -7,7 +7,9 @@ import 'package:flutter_ecommerce_app/data/entity/product.dart';
 import 'package:flutter_ecommerce_app/ui/cubit/anasayfa_cubit.dart';
 import 'package:flutter_ecommerce_app/ui/cubit/firebase_cubit.dart';
 import 'package:flutter_ecommerce_app/ui/cubit/kategori_cubit.dart';
+import 'package:flutter_ecommerce_app/ui/cubit/user_cubit.dart';
 import 'package:flutter_ecommerce_app/ui/views/detay.dart';
+import 'package:flutter_ecommerce_app/ui/views/hesap_bilgileri.dart';
 import 'package:flutter_ecommerce_app/ui/views/sepet.dart';
 
 class Anasayfa extends StatefulWidget {
@@ -23,57 +25,127 @@ class _AnasayfaState extends State<Anasayfa> {
     super.initState();
     context.read<AnasayfaCubit>().urunleriYukle();
     context.read<KategoriCubit>().kategoriler();
+    context.read<UserCubit>().fetchUserInfo();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 16),
+      backgroundColor: backgroundColor,
+      appBar: _buildAppBar(context),
+      drawer: _buildDrawer(),
+      body: _buildBody(context),
+    );
+  }
+
+  AppBar _buildAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: backgroundColor,
+      title: Text("FusionX", style: baslikStyle),
+      centerTitle: true,
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 16),
           child: IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () {
-              context.read<FirebaseCubit>().logOut(context);
-            },
-          ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Sepet(),
+                    ));
+              },
+              icon: const Icon(Icons.shopping_bag_outlined)),
+        )
+      ],
+    );
+  }
+
+  SingleChildScrollView _buildBody(BuildContext context) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Search Bar
+            _buildSearchBar(context),
+
+            // Category List
+            _buildCategory(),
+
+            // List of products (Grid of Cards)
+            _buildProductsGrid(),
+          ],
         ),
-        backgroundColor: Colors.white,
-        title: Text("FusionX", style: baslikStyle),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: IconButton(
-                onPressed: () {
+      ),
+    );
+  }
+
+  Drawer _buildDrawer() {
+    return Drawer(
+      child: BlocBuilder<UserCubit, Map<String, String?>>(
+        builder: (context, state) {
+          return ListView(
+            children: [
+              DrawerHeader(
+                decoration: const BoxDecoration(color: Colors.black),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const CircleAvatar(
+                          radius: 30,
+                          backgroundColor: Colors.white,
+                          child: Icon(
+                            Icons.person,
+                            color: Colors.black,
+                            size: 40,
+                          ),
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              context.read<FirebaseCubit>().logOut(context);
+                            },
+                            icon: const Icon(
+                              Icons.logout,
+                              color: Colors.white,
+                            ))
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      state['userName'] ?? 'Yükleniyor...',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
+                    ),
+                    Text(
+                      state['email'] ?? 'Yükleniyor...',
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.account_box),
+                title: Text('Hesap Bilgileri'),
+                onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Sepet(),
+                        builder: (context) => const HesapBilgileri(),
                       ));
                 },
-                icon: const Icon(Icons.shopping_bag_outlined)),
-          )
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // Search Bar
-              _buildSearchBar(context),
-
-              // Category List
-              _buildCategory(),
-
-              // List of products (Grid of Cards)
-              _buildProductsGrid(),
+              ),
             ],
-          ),
-        ),
+          );
+        },
       ),
     );
   }
@@ -90,13 +162,8 @@ class _AnasayfaState extends State<Anasayfa> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: kategoriler.map((kategori) {
-                    return Container(
-                      width: 130,
-                      margin: const EdgeInsets.symmetric(horizontal: 3.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: Colors.white,
-                      ),
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: TextButton(
                         onPressed: () {
                           context
@@ -146,10 +213,11 @@ class _AnasayfaState extends State<Anasayfa> {
               crossAxisCount: 2,
               mainAxisSpacing: 12,
               crossAxisSpacing: 12,
-              childAspectRatio: 3 / 4,
+              childAspectRatio: 3 / 4.1,
             ),
             itemBuilder: (context, index) {
               var product = productList[index];
+
               return GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -162,7 +230,7 @@ class _AnasayfaState extends State<Anasayfa> {
                   );
                 },
                 child: Card(
-                  color: Colors.white,
+                  color: backgroundColor,
                   elevation: 4,
                   margin: const EdgeInsets.all(8),
                   shape: RoundedRectangleBorder(
