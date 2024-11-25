@@ -23,10 +23,13 @@ class _AnasayfaState extends State<Anasayfa> {
   @override
   void initState() {
     super.initState();
-    context.read<AnasayfaCubit>().urunleriYukle();
-    context.read<KategoriCubit>().kategoriler();
-    context.read<UserCubit>().fetchUserInfo();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<AnasayfaCubit>().urunleriYukle();
+      context.read<KategoriCubit>().kategoriler();
+      context.read<UserCubit>().fetchUserInfo();
+    });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +44,7 @@ class _AnasayfaState extends State<Anasayfa> {
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
       backgroundColor: backgroundColor,
-      title: Text("FusionX", style: baslikStyle),
+      title: Text("Fashion", style: baslikStyle),
       centerTitle: true,
       actions: [
         Padding(
@@ -72,7 +75,6 @@ class _AnasayfaState extends State<Anasayfa> {
 
             // Category List
             _buildCategory(),
-
             // List of products (Grid of Cards)
             _buildProductsGrid(),
           ],

@@ -63,32 +63,30 @@ class _DetaySayfaState extends State<DetaySayfa> {
                     width: MediaQuery.of(context).size.width - 32,
                     fit: BoxFit.contain,
                   ),
-                  Text(
-                    widget.product.ad,
-                    style: const TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "NotoSerif"),
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    widget.product.marka,
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.grey[700],
-                        fontFamily: "NotoSerif"),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        "${widget.product.marka} ${widget.product.ad}",
+                        style: const TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "NotoSerif"),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 10),
+                  Text(
+                    "Kategori: ${widget.product.kategori}",
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey[600],
+                        fontFamily: "NotoSerif"),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        "Kategori: ${widget.product.kategori}",
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.grey[600],
-                            fontFamily: "NotoSerif"),
-                      ),
+                      _buildCountText(),
                       const SizedBox(width: 20),
                       Text(
                         "₺${widget.product.fiyat}",
@@ -104,7 +102,6 @@ class _DetaySayfaState extends State<DetaySayfa> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      _buildCountText(),
                       const SizedBox(width: 20),
                       _buildButton(context),
                     ],
@@ -163,19 +160,19 @@ class _DetaySayfaState extends State<DetaySayfa> {
             );
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: backgroundColor,
+        backgroundColor: Colors.black,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
         elevation: 0,
       ),
-      child: Text(
+      child: const Text(
         "Sepete Ekle",
         style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: textColor,
+            color: Colors.white,
             fontFamily: "NotoSerif"),
       ),
     );

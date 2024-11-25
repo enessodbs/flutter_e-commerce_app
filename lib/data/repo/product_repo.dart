@@ -48,7 +48,7 @@ class ProductRepo {
 
     // Alanları kontrol et ve nullable olarak ayarla
     String? userName = userData['ad'] as String?;
-    String? email = userData['email'] as String?;
+    String? email = currentUser.email;
     String? kullaniciAdi = userData['kullaniciAdi'] as String?;
 
     return {
@@ -98,7 +98,7 @@ class ProductRepo {
       await FirebaseFirestore.instance
           .collection('users')
           .doc(userCredential.user?.uid)
-          .set({'kullaniciAdi': username, 'ad': ad, 'email': email});
+          .set({'kullaniciAdi': username, 'ad': ad});
     } on FirebaseAuthException catch (e) {
       // Firebase Auth hatası alınırsa, hata mesajını döndür
       print('Error: ${e.message}');

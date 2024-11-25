@@ -56,7 +56,7 @@ class _HesapBilgileriState extends State<HesapBilgileri> {
                   readOnly: true,
                   controller: userNameController,
                   decoration: const InputDecoration(
-                    labelText: "Kullanıcı Adı",
+                    labelText: "Ad - Soyad",
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -72,7 +72,7 @@ class _HesapBilgileriState extends State<HesapBilgileri> {
                   readOnly: true,
                   controller: firebaseUserNameController,
                   decoration: const InputDecoration(
-                    labelText: "Kullanıcı Adı (Firebase)",
+                    labelText: "Kullanıcı Adı",
                   ),
                 ),
                 const SizedBox(
