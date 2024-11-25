@@ -44,7 +44,7 @@ class _AnasayfaState extends State<Anasayfa> {
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
       backgroundColor: backgroundColor,
-      title: Text("Fashion", style: baslikStyle),
+      title: Text("FusionX", style: baslikStyle),
       centerTitle: true,
       actions: [
         Padding(
