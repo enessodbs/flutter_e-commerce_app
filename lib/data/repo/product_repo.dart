@@ -27,40 +27,40 @@ class ProductRepo {
   }
 
   // Firebase üzerinden kullanıcı bilgilerini çeker
- Future<Map<String, String?>> fetchUserInfo() async {
-  try {
-    User? currentUser = FirebaseAuth.instance.currentUser;
-    if (currentUser == null) {
-      throw Exception("Kullanıcı oturum açmamış.");
+  Future<Map<String, String?>> fetchUserInfo() async {
+    try {
+      User? currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser == null) {
+        throw Exception("Kullanıcı oturum açmamış.");
+      }
+
+      // Kullanıcı dokümanını al
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(currentUser.uid)
+          .get();
+
+      // Doküman verilerini kontrol et
+      Map<String, dynamic>? userData = userDoc.data() as Map<String, dynamic>?;
+      if (userData == null) {
+        throw Exception("Kullanıcı bilgileri bulunamadı.");
+      }
+
+      // Alanları kontrol et ve nullable olarak ayarla
+      String? userName = userData['ad'] as String?;
+      String? email = currentUser.email;
+      String? kullaniciAdi = userData['kullaniciAdi'] as String?;
+
+      return {
+        'userName': userName,
+        'email': email,
+        'kullaniciAdi': kullaniciAdi,
+      };
+    } catch (e) {
+      // Hata durumunda dönen değer
+      return {'userName': 'Hata', 'email': 'Hata', 'kullaniciAdi': 'Hata'};
     }
-
-    // Kullanıcı dokümanını al
-    DocumentSnapshot userDoc = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(currentUser.uid)
-        .get();
-
-    // Doküman verilerini kontrol et
-    Map<String, dynamic>? userData = userDoc.data() as Map<String, dynamic>?;
-    if (userData == null) {
-      throw Exception("Kullanıcı bilgileri bulunamadı.");
-    }
-
-    // Alanları kontrol et ve nullable olarak ayarla
-    String? userName = userData['ad'] as String?;
-    String? email = currentUser.email;
-    String? kullaniciAdi = userData['kullaniciAdi'] as String?;
-
-    return {
-      'userName': userName,
-      'email': email,
-      'kullaniciAdi': kullaniciAdi,
-    };
-  } catch (e) {
-    // Hata durumunda dönen değer
-    return {'userName': 'Hata', 'email': 'Hata', 'kullaniciAdi': 'Hata'};
   }
-}
 
   // Ürünleri JSON'dan parse etme metodu
   List<Product> parseProductCevap(String result) {
@@ -145,8 +145,6 @@ class ProductRepo {
     }
   }
 
-   
-
   // Ürünleri yükleme metodu
   Future<List<Product>> urunleriYukle({String kategori = "Tüm Ürünler"}) async {
     var url = "http://kasimadalan.pe.hu/urunler/tumUrunleriGetir.php";
@@ -178,7 +176,21 @@ class ProductRepo {
               ?.map((item) => CartProduct.fromJson(item))
               .toList() ??
           [];
+/*
+      var groupProducts = <int, CartProduct>{};
 
+      for (var product in sepetListesi) {
+        if (groupProducts.containsKey(product.product.id)) {
+          groupProducts[product.product.id]!.siparisAdeti +=
+              product.siparisAdeti;
+        } else {
+          groupProducts[product.product.id] = product;
+        }
+      }
+
+      var sepetList = groupProducts.values.toList();
+
+      return sepetList;*/
       return sepetListesi;
     } catch (e) {
       print("Sepet Listeleme Hatası: $e");
