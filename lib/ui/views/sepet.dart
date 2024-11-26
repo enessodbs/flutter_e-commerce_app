@@ -286,25 +286,38 @@ class _SepetState extends State<Sepet> {
                                     showDialog(
                                       context: context,
                                       builder: (context) => AlertDialog(
-                                        title: const Text("Ürün Sil"),
+                                        backgroundColor: Colors.white,
+                                        title: const Text(
+                                          "Ürün Sil",
+                                          style: TextStyle(color: Colors.black),
+                                        ),
                                         content: const Text(
-                                            "Bu ürünü sepetinizden silmek istediğinizden emin misiniz?"),
+                                          "Bu ürünü sepetinizden silmek istediğinizden emin misiniz?",
+                                          style: TextStyle(color: Colors.black),
+                                        ),
                                         actions: [
                                           TextButton(
                                             onPressed: () {
                                               Navigator.pop(context);
                                             },
-                                            child: const Text("Hayır"),
+                                            child: const Text(
+                                              "Hayır",
+                                              style: TextStyle(
+                                                  color: Colors.black),
+                                            ),
                                           ),
                                           TextButton(
                                             onPressed: () {
                                               context
                                                   .read<SepetCubit>()
-                                                  .urunSil("enessodbs",
-                                                      cartProduct.sepetId);
+                                                  .urunSil(cartProduct.sepetId);
                                               Navigator.pop(context);
                                             },
-                                            child: const Text("Evet"),
+                                            child: const Text(
+                                              "Evet",
+                                              style: TextStyle(
+                                                  color: Colors.black),
+                                            ),
                                           ),
                                         ],
                                       ),

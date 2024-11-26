@@ -18,7 +18,7 @@ class SepetCubit extends Cubit<List<CartProduct>> {
     }
   }
 
-  Future<void> urunSil(String kullaniciAdi, int sepetId) async {
+  Future<void> urunSil( int sepetId) async {
     try {
       await productRepo.sepetUrunSil(sepetId);
       await sepetListele();

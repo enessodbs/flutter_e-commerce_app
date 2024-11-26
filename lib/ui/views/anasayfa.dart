@@ -27,7 +27,7 @@ class _AnasayfaState extends State<Anasayfa> {
       context.read<AnasayfaCubit>().urunleriYukle();
       context.read<KategoriCubit>().kategoriler();
       context.read<UserCubit>().fetchUserInfo();
-    }); 
+    });
   }
 
   @override
@@ -38,9 +38,7 @@ class _AnasayfaState extends State<Anasayfa> {
       body: Container(
         height: double.infinity, // Ekranın tamamını kaplamasını sağlar
         width: double.infinity, // Ekranın tamamını kaplamasını sağlar
-        decoration: BoxDecoration(
-          gradient: backgrounGradient
-        ),
+        decoration: BoxDecoration(gradient: backgrounGradient),
         child: _buildBody(context),
       ),
     );
@@ -80,9 +78,7 @@ class _AnasayfaState extends State<Anasayfa> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _buildSearchBar(context),
-
             _buildCategory(),
-       
             _buildProductsGrid(),
           ],
         ),
@@ -158,57 +154,63 @@ class _AnasayfaState extends State<Anasayfa> {
       ),
     );
   }
-
-  BlocBuilder<KategoriCubit, List<Kategori>> _buildCategory() {
-    return BlocBuilder<KategoriCubit, List<Kategori>>(
-      builder: (context, kategoriler) {
-        if (kategoriler.isNotEmpty) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.06,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: kategoriler.map((kategori) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextButton(
-                        onPressed: () {
-                          context
-                              .read<AnasayfaCubit>()
-                              .urunleriYukle(kategori: kategori.name);
-                        },
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                        ),
-                        child: Center(
-                          child: Text(
-                            textAlign: TextAlign.center,
-                            kategori.name,
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontFamily: "Literata",
-                              fontWeight: FontWeight.normal,
-                              fontSize: 19,
-                            ),
-                          ),
-                        ),
-                      ),
+BlocBuilder<KategoriCubit, List<Kategori>> _buildCategory() {
+  return BlocBuilder<KategoriCubit, List<Kategori>>(
+    builder: (context, kategoriler) {
+      if (kategoriler.isNotEmpty) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height * 0.06,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(kategoriler.length * 2 -1 , (index) {
+                  if (index.isOdd) {
+                    return const VerticalDivider(
+                      width: 20,
+                      thickness: 1,
+                      indent: 5,
+                      endIndent: 5,
+                      color: Colors.black,
                     );
-                  }).toList(),
-                ),
+                  }
+                  final kategoriIndex = index ~/ 2; 
+                  final kategori = kategoriler[kategoriIndex];
+                  return TextButton(
+                    onPressed: () {
+                      context
+                          .read<AnasayfaCubit>()
+                          .urunleriYukle(kategori: kategori.name);
+                    },
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                    ),
+                    child: Text(
+                      kategori.name,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontFamily: "Literata",
+                        fontWeight: FontWeight.normal,
+                        fontSize: 19,
+                      ),
+                    ),
+                  );
+                }),
               ),
             ),
-          );
-        } else {
-          return const Center(
-            child: Text("Kategoriler yüklenemedi veya boş."),
-          );
-        }
-      },
-    );
-  }
+          ),
+        );
+      } else {
+        return const Center(
+          child: Text("Kategoriler yüklenemedi veya boş."),
+        );
+      }
+    },
+  );
+}
+
 
   Widget _buildProductsGrid() {
     return BlocBuilder<AnasayfaCubit, List<Product>>(
