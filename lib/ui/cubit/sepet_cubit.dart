@@ -30,12 +30,10 @@ class SepetCubit extends Cubit<List<CartProduct>> {
   int toplamHesapla(List<CartProduct> cartProducts) {
     int toplamUcret = 0;
 
-    // Ürünlerin toplam ücretini hesapla
     for (var cartProduct in cartProducts) {
       toplamUcret += cartProduct.product.fiyat * cartProduct.siparisAdeti;
     }
 
-    // Eğer toplam ücret 5000'in altındaysa kargo ücreti ekle
     if (toplamUcret < 5000) {
       toplamUcret += kargoUcretiHesapla(toplamUcret, cartProducts);
     }
@@ -45,13 +43,9 @@ class SepetCubit extends Cubit<List<CartProduct>> {
 
   int kargoUcretiHesapla(int toplamTutar, List<CartProduct> cartProducts) {
     if (toplamTutar >= 5000) {
-      // Eğer toplam tutar 5000 veya daha fazlaysa kargo ücretsiz
       return 0;
     }
-
     int kargoUcreti = 0;
-
-    // Her ürünün sipariş adeti başına 50 birim kargo ücreti
     for (var product in cartProducts) {
       kargoUcreti += product.siparisAdeti * 50;
     }
@@ -59,7 +53,7 @@ class SepetCubit extends Cubit<List<CartProduct>> {
     return kargoUcreti;
   }
 
-  Future<void> sepetiBosalt(String kullaniciAdi) async {
+  Future<void> sepetiBosalt() async {
     var sepetListesi = state;
     await productRepo.sepetiBosalt(sepetListesi);
     emit([]);

@@ -27,38 +27,47 @@ class _AnasayfaState extends State<Anasayfa> {
       context.read<AnasayfaCubit>().urunleriYukle();
       context.read<KategoriCubit>().kategoriler();
       context.read<UserCubit>().fetchUserInfo();
-    });
+    }); 
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
       appBar: _buildAppBar(context),
       drawer: _buildDrawer(),
-      body: _buildBody(context),
+      body: Container(
+        height: double.infinity, // Ekranın tamamını kaplamasını sağlar
+        width: double.infinity, // Ekranın tamamını kaplamasını sağlar
+        decoration: BoxDecoration(
+          gradient: backgrounGradient
+        ),
+        child: _buildBody(context),
+      ),
     );
   }
 
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: backgroundColor,
+      backgroundColor: Colors.white, // Transparan yapıldı
+      elevation: 0, // Gölge kaldırıldı
       title: Text("FusionX", style: baslikStyle),
       centerTitle: true,
+
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 16),
           child: IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Sepet(),
-                    ));
-              },
-              icon: const Icon(Icons.shopping_bag_outlined)),
-        )
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Sepet(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.shopping_bag_outlined),
+          ),
+        ),
       ],
     );
   }
@@ -70,12 +79,10 @@ class _AnasayfaState extends State<Anasayfa> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Search Bar
             _buildSearchBar(context),
 
-            // Category List
             _buildCategory(),
-            // List of products (Grid of Cards)
+       
             _buildProductsGrid(),
           ],
         ),
@@ -215,7 +222,7 @@ class _AnasayfaState extends State<Anasayfa> {
               crossAxisCount: 2,
               mainAxisSpacing: 12,
               crossAxisSpacing: 12,
-              childAspectRatio: 3 / 4.1,
+              childAspectRatio: 3 / 3.5,
             ),
             itemBuilder: (context, index) {
               var product = productList[index];
@@ -248,8 +255,8 @@ class _AnasayfaState extends State<Anasayfa> {
                           borderRadius: BorderRadius.circular(8),
                           child: Image.network(
                             "http://kasimadalan.pe.hu/urunler/resimler/${product.resim}",
-                            fit: BoxFit.cover,
-                            height: 120,
+                            fit: BoxFit.contain,
+                            height: 95,
                             width: 130,
                           ),
                         ),
@@ -287,14 +294,12 @@ class _AnasayfaState extends State<Anasayfa> {
   }
 
   Widget _buildSearchBar(BuildContext context) {
-    // Başlangıçta küçükten büyüğe sıralama
     bool state = true;
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Search Bar
           Expanded(
             child: CupertinoSearchTextField(
               backgroundColor: Colors.white,
@@ -308,7 +313,6 @@ class _AnasayfaState extends State<Anasayfa> {
               },
             ),
           ),
-          // Sort Button
           IconButton(
             onPressed: () {
               state = !state;

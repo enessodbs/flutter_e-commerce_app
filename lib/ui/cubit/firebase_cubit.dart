@@ -10,23 +10,23 @@ class FirebaseCubit extends Cubit<String?> {
 
   Future<void> createUser(
       String email, String password, String username, String ad) async {
-    emit('loading'); // Yükleme durumu
+    emit('loading'); 
     try {
       await productRepo.createUser(
-          email, password, username, ad); // Kullanıcı oluştur
-      emit('success'); // Başarılı durum
+          email, password, username, ad); 
+      emit('success'); 
     } catch (e) {
-      emit('error'); // Hata durumu
+      emit('error'); 
     }
   }
 
   Future<void> userLogin(String email, String password) async {
     try {
       await productRepo.userLogin(email, password);
-      emit('success'); // Başarılı durum
+      emit('success'); 
     } catch (e) {
-      emit('error'); // Hata durumu
-      rethrow; // Hata mesajını UI'a iletmek için tekrar fırlat
+      emit('error');
+      rethrow; 
     }
   }
 

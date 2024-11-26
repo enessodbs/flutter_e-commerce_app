@@ -43,7 +43,14 @@ class _DetaySayfaState extends State<DetaySayfa> {
           )
         ],
       ),
-      body: _buildBody(),
+      body: Container(
+        height: double.infinity, 
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: backgrounGradient
+        ),
+        child: _buildBody(),
+      ),
     );
   }
 

@@ -6,7 +6,6 @@ class UserCubit extends Cubit<Map<String, String?>> {
 
   UserCubit(this.productRepo) : super({});
 
-  // Kullanıcı bilgilerini çeker ve durumu günceller
   Future<void> fetchUserInfo() async {
     final userInfo = await productRepo.fetchUserInfo();
     emit(userInfo);

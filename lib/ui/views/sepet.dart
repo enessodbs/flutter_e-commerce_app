@@ -29,14 +29,19 @@ class _SepetState extends State<Sepet> {
         title: Text("Sepetim", style: baslikStyle),
         centerTitle: true,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          _buildCardProduct(),
-          const SizedBox(
-            height: 200,
-          )
-        ],
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(gradient: backgrounGradient),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildCardProduct(),
+            const SizedBox(
+              height: 200,
+            )
+          ],
+        ),
       ),
       bottomSheet: _buildBottomSheet(),
     );
@@ -101,7 +106,7 @@ class _SepetState extends State<Sepet> {
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           elevation: 4,
-                          backgroundColor: Colors.black, // Buton rengi
+                          backgroundColor: Colors.black,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
@@ -118,14 +123,18 @@ class _SepetState extends State<Sepet> {
                                   "Lütfen Sepetinize Ürün Ekleyiniz!",
                                   style: TextStyle(
                                       fontSize: 20,
-                                      fontWeight: FontWeight.w500, color: Colors.black),
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black),
                                 ),
                                 actions: [
                                   TextButton(
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: const Text("Kapat",style: TextStyle(color: Colors.black),),
+                                    child: const Text(
+                                      "Kapat",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -135,32 +144,36 @@ class _SepetState extends State<Sepet> {
                               context: context,
                               builder: (context) => AlertDialog(
                                 backgroundColor: Colors.white,
-                                title: const Text("Sepet Onay",style: TextStyle(color: Colors.black),),
-                                content:
-                                    const Text("Sepeti Onaylıyor musunuz?",style: TextStyle(color: Colors.black),),
+                                title: const Text(
+                                  "Sepet Onay",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                content: const Text(
+                                  "Sepeti Onaylıyor musunuz?",
+                                  style: TextStyle(color: Colors.black),
+                                ),
                                 actions: [
                                   TextButton(
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: const Text("Hayır",style: TextStyle(color: Colors.black),),
+                                    child: const Text(
+                                      "Hayır",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
                                   ),
                                   TextButton(
                                     onPressed: () async {
                                       // Sepeti boşalt
                                       await context
                                           .read<SepetCubit>()
-                                          .sepetiBosalt("enessodbs");
-
-                                      // Dialog ile animasyonu göster
+                                          .sepetiBosalt();
                                       showDialog(
                                         context: context,
-                                        barrierDismissible:
-                                            false, // Kullanıcının arka planı tıklayıp kapatmasını engeller
+                                        barrierDismissible: false,
                                         builder: (BuildContext context) {
                                           return Dialog(
-                                            backgroundColor: Colors
-                                                .transparent, // Arka planı şeffaf yapar
+                                            backgroundColor: Colors.transparent,
                                             child: Container(
                                               height: 170,
                                               width: 200,
@@ -172,17 +185,16 @@ class _SepetState extends State<Sepet> {
                                           );
                                         },
                                       );
-
-                                      // Animasyonu 2 saniye göster ve sonra dialogu kapat
                                       await Future.delayed(
-                                          Duration(seconds: 3));
+                                          const Duration(seconds: 3));
                                       Navigator.of(context, rootNavigator: true)
-                                          .pop(); // Animasyon dialogunu kapatır
-
-                                      // Mevcut sayfayı kapat
+                                          .pop();
                                       Navigator.pop(context);
                                     },
-                                    child: const Text("Evet",style: TextStyle(color: Colors.black),),
+                                    child: const Text(
+                                      "Evet",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -192,7 +204,7 @@ class _SepetState extends State<Sepet> {
                         child: const Text(
                           "Sepeti Onayla",
                           style: TextStyle(
-                            color: Colors.white, // Yazı rengi
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                           ),
@@ -212,8 +224,6 @@ class _SepetState extends State<Sepet> {
   BlocBuilder<SepetCubit, List<CartProduct>> _buildCardProduct() {
     return BlocBuilder<SepetCubit, List<CartProduct>>(
       builder: (context, cartProducts) {
-        // Sepetteki toplamı cubit üzerinden hesapla
-
         return cartProducts.isEmpty
             ? const Center(
                 child: Column(
@@ -229,7 +239,6 @@ class _SepetState extends State<Sepet> {
                 ),
               )
             : Expanded(
-                // Ensures ListView takes available space
                 child: ListView.builder(
                   itemCount: cartProducts.length,
                   itemBuilder: (context, index) {
@@ -239,12 +248,11 @@ class _SepetState extends State<Sepet> {
                       color: backgroundColor,
                       margin: const EdgeInsets.symmetric(
                           vertical: 8, horizontal: 16),
-                      elevation: 2, // Daha şık bir gölge
+                      elevation: 2,
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: Row(
                           children: [
-                            // Ürün resmini göster
                             Image.network(
                               "http://kasimadalan.pe.hu/urunler/resimler/${product.resim}",
                               width: 80,
@@ -255,10 +263,8 @@ class _SepetState extends State<Sepet> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                // Ürün adı
                                 Text("${product.marka} ${product.ad}",
                                     style: productNameStyle),
-
                                 const SizedBox(
                                   height: 10,
                                 ),
@@ -275,10 +281,8 @@ class _SepetState extends State<Sepet> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                // Ürünü silme butonu
                                 IconButton(
                                   onPressed: () {
-                                    // Silmeden önce kullanıcı onayı
                                     showDialog(
                                       context: context,
                                       builder: (context) => AlertDialog(
@@ -308,7 +312,6 @@ class _SepetState extends State<Sepet> {
                                   },
                                   icon: const Icon(Icons.delete),
                                 ),
-                                // Ürün fiyatı
                                 Text(
                                   "${cartProduct.siparisAdeti * product.fiyat} ₺",
                                   style: const TextStyle(

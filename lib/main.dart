@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productRepo = ProductRepo(); // ProductRepo'nun bir örneğini oluşturuyoruz
+    final productRepo = ProductRepo(); 
 
     return MultiBlocProvider(
       providers: [
@@ -42,10 +42,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
-          useMaterial3: true,
-        ),
+        theme: ThemeData.light(),
         home: const SplashScreen(),
       ),
     );
