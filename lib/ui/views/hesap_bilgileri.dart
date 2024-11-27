@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/const/constant.dart';
 import 'package:flutter_ecommerce_app/ui/cubit/firebase_cubit.dart';
 import 'package:flutter_ecommerce_app/ui/cubit/user_cubit.dart';
+import 'package:flutter_ecommerce_app/ui/views/home.dart';
 
 class HesapBilgileri extends StatefulWidget {
   const HesapBilgileri({super.key});
@@ -27,9 +29,12 @@ class _HesapBilgileriState extends State<HesapBilgileri> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
-      appBar: AppBar(backgroundColor: backgroundColor),
-      body: _buildBody(),
+      appBar: AppBar(
+        backgroundColor: backgroundColor,
+      ),
+      body: Container(
+          decoration: BoxDecoration(gradient: backgrounGradient),
+          child: _buildBody()),
     );
   }
 
@@ -121,8 +126,7 @@ class _HesapBilgileriState extends State<HesapBilgileri> {
                 style: TextStyle(color: textColor),
               ),
               content: Column(
-                mainAxisSize:
-                    MainAxisSize.min, 
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   TextField(
                     controller: resetPassEmail,

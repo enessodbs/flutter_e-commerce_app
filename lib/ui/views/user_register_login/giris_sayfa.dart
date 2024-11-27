@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/const/constant.dart';
 import 'package:flutter_ecommerce_app/ui/cubit/firebase_cubit.dart';
-import 'package:flutter_ecommerce_app/ui/views/anasayfa.dart';
+import 'package:flutter_ecommerce_app/ui/views/home.dart';
+import 'package:flutter_ecommerce_app/ui/views/products.dart';
 import 'package:flutter_ecommerce_app/ui/views/user_register_login/kayit_sayfa.dart';
 
 class GirisSayfa extends StatefulWidget {
@@ -71,8 +73,7 @@ class _GirisSayfaState extends State<GirisSayfa> {
                           // Başarılıysa yönlendirme
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => const Anasayfa()),
+                            CupertinoPageRoute(builder: (context) => Anasayfa()),
                           );
                         } catch (error) {
                           // Hata durumunda mesaj göster
@@ -90,7 +91,7 @@ class _GirisSayfaState extends State<GirisSayfa> {
                     TextButton(
                       onPressed: () => Navigator.push(
                           context,
-                          MaterialPageRoute(
+                          CupertinoPageRoute(
                             builder: (context) => const KayitSayfa(),
                           )),
                       child: Text(

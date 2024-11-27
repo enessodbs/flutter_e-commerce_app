@@ -38,7 +38,7 @@ class _SepetState extends State<Sepet> {
           children: [
             _buildCardProduct(),
             const SizedBox(
-              height: 200,
+              height: 150,
             )
           ],
         ),
@@ -53,7 +53,7 @@ class _SepetState extends State<Sepet> {
         int toplam = context.read<SepetCubit>().toplamHesapla(cartProducts);
 
         return Container(
-          height: 200,
+          height: 150,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: const BorderRadius.only(

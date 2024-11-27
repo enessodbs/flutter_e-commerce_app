@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/data/repo/product_repo.dart';
@@ -35,7 +36,7 @@ class FirebaseCubit extends Cubit<String?> {
       await productRepo.logOut();
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => const GirisSayfa()),
+        CupertinoPageRoute(builder: (context) => const GirisSayfa()),
         (route) => false,
       );
     } catch (e) {

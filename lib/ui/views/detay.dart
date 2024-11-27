@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/const/constant.dart';
 import 'package:flutter_ecommerce_app/data/entity/product.dart';
 import 'package:flutter_ecommerce_app/ui/cubit/detay_cubit.dart';
+import 'package:flutter_ecommerce_app/ui/views/home.dart';
 import 'package:flutter_ecommerce_app/ui/views/sepet.dart';
 
 // ignore: must_be_immutable
@@ -24,25 +26,7 @@ class _DetaySayfaState extends State<DetaySayfa> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
-      appBar: AppBar(
-        backgroundColor: backgroundColor,
-        title: Text("FusionX", style: baslikStyle),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Sepet(),
-                      ));
-                },
-                icon: const Icon(Icons.shopping_bag_outlined)),
-          )
-        ],
-      ),
+      appBar: _buildAppBar(context),
       body: Container(
         height: double.infinity, 
         width: double.infinity,
@@ -51,6 +35,28 @@ class _DetaySayfaState extends State<DetaySayfa> {
         ),
         child: _buildBody(),
       ),
+    );
+  }
+
+  AppBar _buildAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: backgroundColor,
+      title: Text("FusionX", style: baslikStyle),
+      centerTitle: true,
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 16),
+          child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) =>  Anasayfa(index: 2),
+                    ));
+              },
+              icon: const Icon(Icons.shopping_bag_outlined)),
+        )
+      ],
     );
   }
 

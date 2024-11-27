@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_app/ui/views/anasayfa.dart';
+import 'package:flutter_ecommerce_app/ui/views/home.dart';
+import 'package:flutter_ecommerce_app/ui/views/products.dart';
 import 'package:flutter_ecommerce_app/ui/views/user_register_login/giris_sayfa.dart';
 
 class AuthCheck extends StatelessWidget {
@@ -16,7 +17,7 @@ class AuthCheck extends StatelessWidget {
           return const Center(
               child: CircularProgressIndicator()); // Yükleniyor ekranı
         } else if (snapshot.hasData) {
-          return const Anasayfa(); // Oturum açıkken
+          return Anasayfa(); // Oturum açıkken
         } else {
           return const GirisSayfa(); // Oturum kapalıysa
         }
