@@ -1,10 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/const/constant.dart';
 import 'package:flutter_ecommerce_app/ui/cubit/firebase_cubit.dart';
 import 'package:flutter_ecommerce_app/ui/cubit/user_cubit.dart';
-import 'package:flutter_ecommerce_app/ui/views/home.dart';
 
 class HesapBilgileri extends StatefulWidget {
   const HesapBilgileri({super.key});

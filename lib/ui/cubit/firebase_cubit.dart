@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/data/repo/product_repo.dart';
 import 'package:flutter_ecommerce_app/ui/views/user_register_login/giris_sayfa.dart';

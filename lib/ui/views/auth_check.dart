@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/ui/views/home.dart';
-import 'package:flutter_ecommerce_app/ui/views/products.dart';
 import 'package:flutter_ecommerce_app/ui/views/user_register_login/giris_sayfa.dart';
 
 class AuthCheck extends StatelessWidget {

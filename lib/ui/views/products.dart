@@ -6,12 +6,10 @@ import 'package:flutter_ecommerce_app/data/entity/category.dart';
 import 'package:flutter_ecommerce_app/data/entity/product.dart';
 import 'package:flutter_ecommerce_app/ui/cubit/anasayfa_cubit.dart';
 import 'package:flutter_ecommerce_app/ui/cubit/detay_cubit.dart';
-import 'package:flutter_ecommerce_app/ui/cubit/firebase_cubit.dart';
 import 'package:flutter_ecommerce_app/ui/cubit/kategori_cubit.dart';
 import 'package:flutter_ecommerce_app/ui/cubit/user_cubit.dart';
 import 'package:flutter_ecommerce_app/ui/views/detay.dart';
 import 'package:flutter_ecommerce_app/ui/views/hesap_bilgileri.dart';
-import 'package:flutter_ecommerce_app/ui/views/sepet.dart';
 
 class Products extends StatefulWidget {
   const Products({super.key});

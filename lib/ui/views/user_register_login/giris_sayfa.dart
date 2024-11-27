@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/const/constant.dart';
 import 'package:flutter_ecommerce_app/ui/cubit/firebase_cubit.dart';
 import 'package:flutter_ecommerce_app/ui/views/home.dart';
-import 'package:flutter_ecommerce_app/ui/views/products.dart';
 import 'package:flutter_ecommerce_app/ui/views/user_register_login/kayit_sayfa.dart';
 
 class GirisSayfa extends StatefulWidget {

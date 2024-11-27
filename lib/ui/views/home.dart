@@ -2,10 +2,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:flutter_ecommerce_app/main.dart';
 import 'package:flutter_ecommerce_app/ui/cubit/firebase_cubit.dart';
-import 'package:flutter_ecommerce_app/ui/views/hesap_bilgileri.dart';
 import 'package:flutter_ecommerce_app/ui/views/products.dart';
 import 'package:flutter_ecommerce_app/ui/views/sepet.dart';
 import 'package:flutter_ecommerce_app/ui/views/user_register_login/giris_sayfa.dart';

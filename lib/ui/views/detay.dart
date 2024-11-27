@@ -5,7 +5,6 @@ import 'package:flutter_ecommerce_app/const/constant.dart';
 import 'package:flutter_ecommerce_app/data/entity/product.dart';
 import 'package:flutter_ecommerce_app/ui/cubit/detay_cubit.dart';
 import 'package:flutter_ecommerce_app/ui/views/home.dart';
-import 'package:flutter_ecommerce_app/ui/views/sepet.dart';
 
 // ignore: must_be_immutable
 class DetaySayfa extends StatefulWidget {
