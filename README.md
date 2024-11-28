@@ -11,3 +11,5 @@ Bu proje, TechCareer tarafından düzenlenen Flutter Bootcamp programı için ge
 • Firestore: Firestore veritabanını, kullanıcı hesap bilgilerini saklamak ve kullanıcının aktif hesabına dair verilere erişim sağlamak amacıyla kullandım. Kullanıcıların hesap bilgilerini, Drawer menüsünde ve hesap 
   bilgileri sayfasında Firebase üzerinden dinamik olarak yansıttım.
 
+• Flutter Splash Screen: Uygulama açılışında kullanıcıya hoş bir görüntü sunmak için Flutter'ın splash screen özelliğini kullandım.
+
