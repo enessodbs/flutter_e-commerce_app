@@ -1,16 +1,12 @@
 # flutter_ecommerce_app
 
-A new Flutter project.
+Bu proje, TechCareer tarafından düzenlenen Flutter Bootcamp programı için geliştirdiğim bir e-ticaret uygulamasıdır. Aşağıda, projede kullandığım teknolojiler ve mimariler açıklanmıştır:
 
-## Getting Started
+Bloc Pattern: Uygulama mimarisi olarak Bloc Pattern kullandım. Bu sayede kodun karmaşıklığının önüne geçtim ve UI/UX işlemlerini iş mantığından ayırarak daha sürdürülebilir bir yapı oluşturdum.
 
-This project is a starting point for a Flutter application.
+Dio: Flutter'ın Dio paketiyle API'den gelen verileri işledim ve uygulama ile entegre ettim.
 
-A few resources to get you started if this is your first Flutter project:
+Firebase: Firebase Authentication ile kullanıcıya özel bir e-ticaret deneyimi sağladım. Kullanıcılar, kayıt olurken sağladıkları kullanıcı adı, e-posta ve şifre ile kendilerine ait profillere erişebildiler.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Firestore: Firestore veritabanını, kullanıcı hesap bilgilerini saklamak ve kullanıcının aktif hesabına dair verilere erişim sağlamak amacıyla kullandım. Kullanıcıların hesap bilgilerini, Drawer menüsünde ve hesap bilgileri sayfasında Firebase üzerinden dinamik olarak yansıttım.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
